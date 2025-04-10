@@ -1,10 +1,6 @@
 package com.irl.ai.irl_ai.Entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,11 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
 
     @Column(unique = true, nullable = false)
@@ -34,7 +28,7 @@ public class User {
     @Column(nullable = false)
     private RelationType relationType;
 
-    private IsVerified isVerified;
+    private Boolean isVerified;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -47,16 +41,5 @@ public class User {
     private LocalDateTime updatedAt;
 
 
-
-    public enum Status {
-        PENDING,
-        APPROVED,
-        REJECTED
-    }
-    public enum IsVerified {
-        YES,
-        NO,
-        PENDING
-    }
 }
 

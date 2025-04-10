@@ -2,6 +2,7 @@ package com.irl.ai.irl_ai.Payloads;
 
 
 import com.irl.ai.irl_ai.Entities.RelationType;
+import com.irl.ai.irl_ai.Entities.Status;
 import com.irl.ai.irl_ai.Entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +18,8 @@ public class UserDTO {
     private String email;
     private String passwordHash;
     private RelationType relationType;
-    private User.IsVerified isVerified;
-    private User.Status status;
+    private Boolean isVerified;
+    private Status status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
