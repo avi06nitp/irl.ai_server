@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.management.relation.RelationType;
+import com.irl.ai.irl_ai.Entities.RelationType;
 
 @NoArgsConstructor
 @Getter

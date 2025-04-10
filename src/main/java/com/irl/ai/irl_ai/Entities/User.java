@@ -46,12 +46,7 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public enum RelationType {
-        FRIEND,
-        CO_WORKER,
-        RECRUITER,
-        STALKER
-    }
+
 
     public enum Status {
         PENDING,
