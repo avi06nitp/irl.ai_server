@@ -53,6 +53,7 @@ public class KnowledgebaseServiceImpl implements KnowledgebaseService {
         knowledgebaseRepo.deleteById(id);
     }
 
+    //List of all Knowledge base
     @Override
     public List<KnowledgebaseDTO> getAllKnowledgebase() {
         List<Knowledgebase> knowledgebases=this.knowledgebaseRepo.findAll();
