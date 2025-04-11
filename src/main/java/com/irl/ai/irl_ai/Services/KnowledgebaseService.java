@@ -6,5 +6,5 @@ public interface KnowledgebaseService {
     KnowledgebaseDTO createKnowledgebase(KnowledgebaseDTO knowledgeBaseDTO);
     KnowledgebaseDTO updateKnowledgebase(KnowledgebaseDTO knowledgeBaseDTO);
     KnowledgebaseDTO getKnowledgebaseById(Long id);
-    KnowledgebaseDTO deleteKnowledgebase(Long id);
+    void deleteKnowledgebaseById(Long id);
 }

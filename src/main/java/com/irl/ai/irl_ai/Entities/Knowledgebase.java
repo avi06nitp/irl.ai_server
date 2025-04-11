@@ -18,8 +18,10 @@ public class Knowledgebase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private RelationType relationType;
+
     @Column(nullable = false)
     private String content;
 }

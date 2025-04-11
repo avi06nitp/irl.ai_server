@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "chatSession")
@@ -17,11 +18,18 @@ public class ChatSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany
+    @JoinColumn(name = "chat_message_id", nullable = false)
+    private List<ChatMessage> chatMessages;
+
     @Column(nullable = false)
     private LocalDateTime startedAt;
-    private LocalDateTime endedAt;
 
+    private LocalDateTime endedAt;
 
 }

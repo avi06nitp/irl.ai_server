@@ -5,10 +5,11 @@ import java.util.List;
 
 
 public interface UserService {
-    UserDTO findByUsername(String username);
+    UserDTO findByUserid(Long userId);
     UserDTO createUser(UserDTO userDTO);
-    UserDTO updateUser(String username);
+    UserDTO updateUser(UserDTO userDTO, Long userId);
     void deleteUser(String username);
     List<UserDTO> findAllUsers();
+
 
 }

@@ -17,18 +17,26 @@ public class ChatMessage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private Long chat_session_id;
+    @ManyToOne
+    @JoinColumn(name = "chat_session_id", nullable = false)
+    private ChatSession chatSession;
+
     @Column(nullable = false)
     private Sender sender;
+
     @Column(nullable = false)
     private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+
     @Column(nullable = false)
     private LocalDateTime timstamp;
-    @Column(nullable = false)
+
+    @Column
     private Boolean is_useful;
-
-
 
 
 }

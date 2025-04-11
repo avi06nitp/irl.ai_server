@@ -1,6 +1,4 @@
-package com.irl.ai.irl_ai.ServiceImplementation;
-import com.irl.ai.irl_ai.Entities.Knowledgebase;
-
+package com.irl.ai.irl_ai.Services.ServiceImplementation;
 import com.irl.ai.irl_ai.Entities.Knowledgebase;
 import com.irl.ai.irl_ai.Payloads.KnowledgebaseDTO;
 import com.irl.ai.irl_ai.Repositories.KnowledgebaseRepo;
@@ -8,8 +6,6 @@ import com.irl.ai.irl_ai.Services.KnowledgebaseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class KnowledgebaseServiceImpl implements KnowledgebaseService {
@@ -28,17 +24,24 @@ public class KnowledgebaseServiceImpl implements KnowledgebaseService {
 
     @Override
     public KnowledgebaseDTO updateKnowledgebase(KnowledgebaseDTO knowledgeBaseDTO) {
-        return null;
+        Knowledgebase knowledgebase=this.modelMapper.map(knowledgeBaseDTO, Knowledgebase.class);
+        Knowledgebase savedknowledgebase= knowledgebaseRepo.save(knowledgebase);
+        return this.modelMapper.map(savedknowledgebase, KnowledgebaseDTO.class);
     }
 
     @Override
     public KnowledgebaseDTO getKnowledgebaseById(Long id) {
-        Optional<Knowledgebase> knowledgebase=knowledgebaseRepo.findById(id);
-        return this.modelMapper.map(knowledgebase.get(), KnowledgebaseDTO.class);
+        Knowledgebase knowledgebase = knowledgebaseRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Knowledgebase not found")); // or any custom exception
+        return this.modelMapper.map(knowledgebase, KnowledgebaseDTO.class);
     }
 
+
     @Override
-    public KnowledgebaseDTO deleteKnowledgebase(Long id) {
-        return null;
+    public void deleteKnowledgebaseById(Long id) {
+        if (!knowledgebaseRepo.existsById(id)) {
+            throw new RuntimeException("Knowledgebase not found");
+        }
+        knowledgebaseRepo.deleteById(id);
     }
 }
