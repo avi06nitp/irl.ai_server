@@ -43,9 +43,9 @@ public class UserController {
         return ResponseEntity.ok(userDTO1);
     }
 
-    @DeleteMapping("/{username}")
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable String username) {
-        this.userService.deleteUser(username);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable Long id) {
+        this.userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -55,7 +55,6 @@ public class UserController {
         return ResponseEntity.ok(userDTOs);
 
     }
-
 
 
 }

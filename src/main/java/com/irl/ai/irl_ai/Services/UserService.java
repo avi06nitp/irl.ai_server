@@ -8,7 +8,7 @@ public interface UserService {
     UserDTO findByUserid(Long userId);
     UserDTO createUser(UserDTO userDTO);
     UserDTO updateUser(UserDTO userDTO, Long userId);
-    void deleteUser(String username);
+    void deleteUserById(Long userId);
     List<UserDTO> findAllUsers();
 
 

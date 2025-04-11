@@ -1,5 +1,4 @@
 package com.irl.ai.irl_ai.Services.ServiceImplementation;
-import com.irl.ai.irl_ai.Config.*;
 
 import com.irl.ai.irl_ai.Entities.User;
 import com.irl.ai.irl_ai.Exception.ResourceNotFoundException;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +21,8 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -32,23 +34,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = this.modelMapper.map(userDTO, User.class);
+        String hashedPassword=passwordEncoder.encode(user.getPasswordHash());
+        user.setPasswordHash(hashedPassword);
         User savedUser = this.userRepo.save(user);
         return this.modelMapper.map(savedUser, UserDTO.class);
     }
 
     @Override
     public UserDTO updateUser(UserDTO userDTO, Long userId) {
-        User user=this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "UserId", String.valueOf(userId)));
+        User user=this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "Id", String.valueOf(userId)));
         User savedUser = this.userRepo.save(user);
         return this.modelMapper.map(savedUser, UserDTO.class);
     }
 
     @Override
-    public void deleteUser(String username) {
-        User user = userRepo.findByUsername(username);
-        if (user == null) {
-            throw new ResourceNotFoundException("User", "Username", username);
-        }
+    public void deleteUserById(Long id) {
+        User user = userRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("User", "Id", String.valueOf(id)));
         userRepo.delete(user);
     }
 
